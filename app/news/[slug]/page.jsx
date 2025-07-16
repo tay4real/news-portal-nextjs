@@ -7,9 +7,17 @@ import PopularNews from '@/components/news/PopularNews';
 import Search from '@/components/Search';
 import Title from '@/components/Title';
 import React from 'react';
+import { base_api_url } from '@/config/config';
+import htmlParser from 'react-html-parser';
+
 
 const Details = async ({ params }) => {
   const { slug } = await params;
+
+  const res = await fetch(`${base_api_url}/api/news/details/${slug}`);
+  const { news } = await res.json();
+  console.log(news);
+
   return (
     <div>
       <div className='bg-white shadow py-4'>
@@ -23,14 +31,9 @@ const Details = async ({ params }) => {
             <div className='w-full xl:w-8/12'>
               <div className='w-full pr-0 xl:pr-4'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3'>
-                  {/* {[1, 2, 3, 4, 5, 6].map((news, i) => (
-                    <SimpleDetailsNewsCard
-                      news={{}}
-                      key={i}
-                      type={'details-news'}
-                      height={200}
-                    />
-                  ))} */}
+                  <div className='flex flex-col gap-y-5 bg-white'>
+                    {/* <img src={news.image} alt='' /> */}
+                  </div>
                 </div>
               </div>
             </div>
